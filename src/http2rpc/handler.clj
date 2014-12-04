@@ -3,16 +3,21 @@
             [ring.util.http-response :refer :all]
             [schema.core :as s]))
 
-(s/defschema Message {:message String})
+(s/defschema Message {:response String})
 
 (defapi app
+  {:formats [:json-kw]}
   (swagger-ui)
   (swagger-docs
-    :title "Http2rpc")
-  (swaggered "api"
-    :description "hello world"
-    (GET* "/hello" []
+    :title "http2rpc")
+  (swaggered "invoke"
+    :description "Invoke PBRPC Platform Service"
+    (POST* "/Http2RpcService/Invoke" []
       :return Message
-      :query-params [name :- String]
-      :summary "say hello"
-      (ok {:message (str "Hello, " name)}))))
+      :body-params [host :- s/Str
+                    port :- s/Int
+                    service :- s/Str
+                    method :- s/Str
+                    params :- s/Any]
+      :summary "调用指定的pbrpc服务接口，并获取调用返回值"
+      (ok {:response (str "invoke, " method ", param, " (class params))}))))
