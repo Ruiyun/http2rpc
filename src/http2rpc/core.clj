@@ -1,3 +1,13 @@
-(ns http2rpc.core)
+(ns http2rpc.core
+  (:import [com.baidu.bjf.remoting.protobuf.annotation Protobuf]
+           [com.baidu.jprotobuf.pbrpc ProtobufPRC]
+           [com.baidu.jprotobuf.pbrpc.transport RpcClient RpcClientOptions]
+           [com.baidu.jprotobuf.pbrpc.client ProtobufRpcProxy]))
 
-;;; TBD, 用宏动态生成JProto的client类
+(defrecord EchoInfo [^{Protobuf {:description "the message"}, :tag String} message])
+
+(definterface EchoService
+  (^{ProtobufPRC {:serviceName "EchoService", :onceTalkTimeout 200, :tag EchoInfo}} echo [^EchoInfo request]))
+
+(defn invoke-echo [host port message]
+  (let []))

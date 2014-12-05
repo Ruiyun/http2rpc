@@ -3,7 +3,8 @@
             [ring.util.http-response :refer :all]
             [schema.core :as s]))
 
-(s/defschema Message {:response String})
+(s/defschema Message {:message String})
+(s/defschema Response {:response s/Any})
 
 (defapi app
   {:formats [:json-kw]}
@@ -11,11 +12,19 @@
   (swagger-docs :title "http2rpc")
   (swaggered "invoke" :description "Invoke PBRPC Platform Service"
              (POST* "/Http2RpcService/Invoke" []
-                    :return Message
+                    :return Response
                     :body-params [host :- s/Str
                                   port :- s/Int
                                   service :- s/Str
                                   method :- s/Str
                                   params :- s/Any]
                     :summary "调用指定的pbrpc服务接口，并获取调用返回值"
-                    (ok {:response (str "invoke, " method ", param, " params " param's type:" (type params))}))))
+                    (ok {:response (str "invoke, " method ", param, " params " param's type:" (type params))})))
+  (swaggered "invoke echo" :description "Invoke the standard Echo Service"
+             (POST* "/Http2RpcService/InvokeEcho" []
+                    :return Message
+                    :body-params [host :- s/Str
+                                  port :- s/Int
+                                  message :- s/Str]
+                    :summary "调用新建平台默认的EchoService，用于验证新建平台是否正常工作"
+                    (ok {:response (str "hello")}))))
