@@ -9,8 +9,8 @@
                  [clj-time "0.6.0"]
                  [com.fasterxml.jackson.core/jackson-core "2.3.2"]
                  [com.baidu/jprotobuf-rpc-socket "2.6"]]
-  :global-vars {*warn-on-reflection* true}
   :ring {:handler http2rpc.handler/app}
-  :profiles {:uberjar {:resource-paths ["swagger-ui"]}
+  :profiles {:uberjar {:resource-paths ["swagger-ui"]
+                       :aot :all}
              :dev {:dependencies [[javax.servlet/servlet-api "2.5"]]
                    :plugins [[lein-ring "0.8.13" :exclusions [org.clojure/clojure]]]}})
