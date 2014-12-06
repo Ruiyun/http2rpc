@@ -12,10 +12,10 @@
    echo [^EchoInfo request]))
 
 (defn invoke-echo [host port message]
-  (let [client (RpcClient.)
-        proxy (doto (ProtobufRpcProxy. client EchoService) (.setHost host) (.setPort port))
-        service (.proxy proxy)
-        request (EchoInfo. message)
+  (let [client   (RpcClient.)
+        proxy    (doto (ProtobufRpcProxy. client EchoService) (.setHost host) (.setPort port))
+        service  (.proxy proxy)
+        request  (EchoInfo. message)
         response (.echo service)]
     (.stop client)
-    responses))
+    response))
