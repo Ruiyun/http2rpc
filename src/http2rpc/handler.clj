@@ -1,7 +1,8 @@
 (ns http2rpc.handler
   (:require [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer :all]
-            [schema.core :as s]))
+            [schema.core :as s]
+            [http2rpc.core :refer :all]))
 
 (s/defschema Message {:message String})
 (s/defschema Response {:response s/Any})
@@ -27,4 +28,8 @@
                                   port :- s/Int
                                   message :- s/Str]
                     :summary "调用新建平台默认的EchoService，用于验证新建平台是否正常工作"
-                    (ok {:response (str "hello")}))))
+                    (let [response (try
+                                     (invoke-echo host port message)
+                                     (catch Exception ex
+                                       ex))]
+                      (ok {:response (str response)})))))

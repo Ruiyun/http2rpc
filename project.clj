@@ -8,9 +8,10 @@
                  [metosin/ring-swagger-ui "2.0.17"]
                  [clj-time "0.6.0"]
                  [com.fasterxml.jackson.core/jackson-core "2.3.2"]
-                 [com.baidu/jprotobuf-rpc-socket "2.6"]]
+                 [com.baidu/jprotobuf-rpc-socket "2.7"]]
   :ring {:handler http2rpc.handler/app}
+  :java-source-paths ["echo/src"]
   :profiles {:uberjar {:resource-paths ["swagger-ui"]
-                       :aot :all}
+                       :aot [http2rpc.core]}
              :dev {:dependencies [[javax.servlet/servlet-api "2.5"]]
                    :plugins [[lein-ring "0.8.13" :exclusions [org.clojure/clojure]]]}})
