@@ -11,7 +11,7 @@
   {:formats [:json-kw]}
   (swagger-ui)
   (swagger-docs :title "http2rpc")
-  (swaggered "invoke" :description "Invoke PBRPC Platform Service"
+  (swaggered "invoke" :description "Invoke PBRPC Platform Service (invalid)"
              (POST* "/Http2RpcService/Invoke" []
                     :return Response
                     :body-params [host :- s/Str
@@ -32,4 +32,4 @@
                                      (invoke-echo host port message)
                                      (catch Exception ex
                                        ex))]
-                      (ok {:response (str response)})))))
+                      (ok {:message (.getMessage response)})))))
