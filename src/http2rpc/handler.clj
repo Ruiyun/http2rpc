@@ -25,7 +25,7 @@
              (POST* "/Http2RpcService/InvokeEcho" []
                     :return Message
                     :body-params [host :- s/Str
-                                  {port :- s/Int 8031}
+                                  port :- s/Int
                                   message :- s/Str]
                     :summary "调用新建平台默认的EchoService，用于验证新建平台是否正常工作"
                     (try
