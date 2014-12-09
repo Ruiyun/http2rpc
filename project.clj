@@ -8,7 +8,7 @@
                  [metosin/ring-swagger-ui "2.0.17"]
                  [clj-time "0.6.0"]
                  [com.fasterxml.jackson.core/jackson-core "2.3.2"]
-                 [com.baidu/jprotobuf-rpc-socket "2.7"]]
+                 [com.baidu/jprotobuf-rpc-socket "2.9"]]
   :ring {:handler http2rpc.handler/app}
   :java-source-paths ["echo/src"]
   :profiles {:uberjar {:resource-paths ["swagger-ui"]
