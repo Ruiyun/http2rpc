@@ -9,7 +9,9 @@
                  [clj-time "0.6.0"]
                  [com.fasterxml.jackson.core/jackson-core "2.3.2"]
                  [com.baidu/jprotobuf-rpc-socket "2.9"]]
-  :ring {:handler http2rpc.handler/app}
+  :ring {:handler http2rpc.handler/app
+         :port 8300
+         :nrepl {:start? true, :port 8301}}
   :java-source-paths ["echo/src"]
   :profiles {:uberjar {:resource-paths ["swagger-ui"]
                        :aot [http2rpc.core]}
