@@ -63,3 +63,8 @@ crashlytics.properties
 crashlytics-build.properties
 
 
+
+### SVN template
+.svn/
+
+
