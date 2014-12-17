@@ -13,6 +13,7 @@
          :port 8300
          :nrepl {:start? true, :port 8301}}
   :java-source-paths ["echo/src"]
+  :javac-options ["-target" "1.6" "-source" "1.6"]
   :profiles {:uberjar {:resource-paths ["swagger-ui"]
                        :aot [http2rpc.core]}
              :dev {:dependencies [[javax.servlet/servlet-api "2.5"]]
